@@ -3,22 +3,20 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Login } from "./pages/Login";
 import { Home } from "./pages/Home";
 import { Register } from "./pages/Register";
-import { RequireAuth } from "react-auth-kit";
-
-import { AuthProvider } from "react-auth-kit";
 import { Navbar } from "./components/Navbar";
+import { About } from "./pages/About";
+import { MyProfile } from "./pages/MyProfile";
+
+import { RequireAuth } from "react-auth-kit";
+import { UserDetail } from "./pages/UserDetail";
+import { UserContextProvider } from "./Context/UserContext";
 
 function App() {
   return (
     <>
-      <AuthProvider
-        authType={"cookie"}
-        authName={"_auth"}
-        cookieDomain={window.location.hostname}
-        cookieSecure={false}
-      >
-        <Navbar />
-        <Router>
+      <Router>
+        <UserContextProvider>
+          <Navbar />
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
@@ -30,9 +28,12 @@ function App() {
                 </RequireAuth>
               }
             ></Route>
+            <Route path="/about" element={<About />}></Route>
+            <Route path="/myprofile" element={<MyProfile />}></Route>
+            <Route path="/userDetail" element={<UserDetail />}></Route>
           </Routes>
-        </Router>
-      </AuthProvider>
+        </UserContextProvider>
+      </Router>
     </>
   );
 }

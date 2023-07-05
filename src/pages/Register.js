@@ -1,33 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { Box, Typography, TextField, Button } from "@mui/material";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useSignIn } from "react-auth-kit";
+import UserContext from "../Context/UserContext";
 
 export const Register = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  
   const navigate = useNavigate();
-  const signIn = useSignIn();
+
+  const { register, setEmail, setPassword, password, email, confirmPassword, setConfirmPassword } = useContext(UserContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
-      const response = await axios.post("/api/register", { email, password });
-
-      signIn({
-        token: response.data.token,
-        expiresIn: 3600,
-        tokenType: "Bearer",
-        authState: { email: response.data.email },
-      });
-      navigate("/");
-      // Redirect user to dashboard
-    } catch (error) {
-      alert("please enter right details");
-      console.error(error);
-    }
+    register();
   };
 
   return (
