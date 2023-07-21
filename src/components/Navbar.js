@@ -85,7 +85,7 @@ export const Navbar = () => {
                     textDecoration: "none",
                     color: "#fff",
                   }}
-                  to="/myprofile"
+                  to="/profile"
                 >
                   Profile
                 </Link>

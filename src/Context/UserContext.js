@@ -1,8 +1,9 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import { useSignOut } from "react-auth-kit";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useSignIn } from "react-auth-kit";
+import {useAuthHeader} from 'react-auth-kit'
 
 export const UserContext = createContext(null);
 
@@ -11,13 +12,38 @@ export const UserContextProvider = ({ children }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [userDetails, setuserDetails] = useState({});
   const singOut = useSignOut();
   const navigate = useNavigate();
   const signIn = useSignIn();
 
+  // auth header from react-auth-kit
+  const authHeader = useAuthHeader()
+
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: authHeader(),
+  };
+
+  const fetchUserDetails = async () => {
+    try {
+      const response = await axios.get("/api/user/profiles", {
+        headers: headers,
+      });
+      setuserDetails(response.data);
+    } catch (error) {
+      console.error("Error fetching user details:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserDetails();
+  }, []);
+
   const login = async () => {
     try {
       const response = await axios.post("/api/login", { email, password });
+      // user get login with the help of react aut kit.
       signIn({
         token: response.data.token,
         expiresIn: 3600,
@@ -68,6 +94,8 @@ export const UserContextProvider = ({ children }) => {
     confirmPassword,
     setConfirmPassword,
     register,
+    headers,
+    userDetails,
   };
 
   return (

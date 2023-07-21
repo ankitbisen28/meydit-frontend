@@ -5,7 +5,7 @@ import { Home } from "./pages/Home";
 import { Register } from "./pages/Register";
 import { Navbar } from "./components/Navbar";
 import { About } from "./pages/About";
-import { MyProfile } from "./pages/MyProfile";
+import { Profile } from "./pages/Profile";
 
 import { RequireAuth } from "react-auth-kit";
 import { UserDetail } from "./pages/UserDetail";
@@ -29,7 +29,7 @@ function App() {
               }
             ></Route>
             <Route path="/about" element={<About />}></Route>
-            <Route path="/myprofile" element={<MyProfile />}></Route>
+            <Route path="/profile" element={<Profile />}></Route>
             <Route path="/userDetail" element={<UserDetail />}></Route>
           </Routes>
         </UserContextProvider>
