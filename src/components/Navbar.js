@@ -15,7 +15,7 @@ import { useContext } from "react";
 
 export const Navbar = () => {
 
-  const { loginUser, logout } = useContext(UserContext);
+  const { logout, authHeader } = useContext(UserContext);
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -52,7 +52,7 @@ export const Navbar = () => {
             fontSize="20px"
             alignItems="flex-end"
           >
-            {loginUser === true ? (
+            {authHeader() ? (
               <Stack
                 direction="row"
                 marginLeft="auto"

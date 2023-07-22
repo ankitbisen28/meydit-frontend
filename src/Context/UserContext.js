@@ -8,7 +8,6 @@ import { useAuthHeader } from "react-auth-kit";
 export const UserContext = createContext(null);
 
 export const UserContextProvider = ({ children }) => {
-  const [loginUser, setLoginUser] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -27,7 +26,7 @@ export const UserContextProvider = ({ children }) => {
 
   const fetchUserDetails = async () => {
     try {
-      if (loginUser === true) {
+      if (authHeader()) {
         const response = await axios.get("/api/user/profiles", {
           headers: headers,
         });
@@ -41,7 +40,7 @@ export const UserContextProvider = ({ children }) => {
   useEffect(() => {
     fetchUserDetails();
     // eslint-disable-next-line
-  }, [loginUser]);
+  }, [authHeader()]);
 
   const login = async () => {
     try {
@@ -54,7 +53,6 @@ export const UserContextProvider = ({ children }) => {
         authState: { email: response.data.email },
       });
       navigate("/");
-      setLoginUser(true);
     } catch (error) {
       alert("please enter right details");
       console.error(error);
@@ -72,7 +70,6 @@ export const UserContextProvider = ({ children }) => {
       });
       // Redirect user to HomePage
       navigate("/userDetail");
-      setLoginUser(true);
     } catch (error) {
       alert("please enter right details");
       console.error(error);
@@ -81,14 +78,11 @@ export const UserContextProvider = ({ children }) => {
 
   const logout = () => {
     singOut();
-    setLoginUser(false);
     navigate("/login");
   };
 
   const value = {
     logout,
-    loginUser,
-    setLoginUser,
     login,
     setEmail,
     setPassword,
@@ -99,6 +93,7 @@ export const UserContextProvider = ({ children }) => {
     register,
     headers,
     userDetails,
+    authHeader,
   };
 
   return (
