@@ -3,7 +3,7 @@ import { useSignOut } from "react-auth-kit";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useSignIn } from "react-auth-kit";
-import {useAuthHeader} from 'react-auth-kit'
+import { useAuthHeader } from "react-auth-kit";
 
 export const UserContext = createContext(null);
 
@@ -18,7 +18,7 @@ export const UserContextProvider = ({ children }) => {
   const signIn = useSignIn();
 
   // auth header from react-auth-kit
-  const authHeader = useAuthHeader()
+  const authHeader = useAuthHeader();
 
   const headers = {
     "Content-Type": "application/json",
@@ -27,10 +27,12 @@ export const UserContextProvider = ({ children }) => {
 
   const fetchUserDetails = async () => {
     try {
-      const response = await axios.get("/api/user/profiles", {
-        headers: headers,
-      });
-      setuserDetails(response.data);
+      if (loginUser === true) {
+        const response = await axios.get("/api/user/profiles", {
+          headers: headers,
+        });
+        setuserDetails(response.data);
+      }
     } catch (error) {
       console.error("Error fetching user details:", error);
     }
@@ -38,7 +40,8 @@ export const UserContextProvider = ({ children }) => {
 
   useEffect(() => {
     fetchUserDetails();
-  }, []);
+    // eslint-disable-next-line
+  }, [loginUser]);
 
   const login = async () => {
     try {
