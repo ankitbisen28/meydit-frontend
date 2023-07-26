@@ -3,12 +3,9 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
 import state from "../utils/State.json";
-import FormControl from "@mui/material/FormControl";
 import UserContext from "../Context/UserContext";
+import { StateList } from "../components/StateList";
 
 export const UserDetail = () => {
   const [userData, setUserData] = useState({});
@@ -77,18 +74,7 @@ export const UserDetail = () => {
         />
       </Box>
       <Box display="flex" flexDirection="row">
-        <FormControl fullWidth style={{ margin: "2rem 1rem 0 0" }}>
-          <InputLabel id="demo-simple-select-label">State</InputLabel>
-          <Select fullWidth name="state" onChange={handleChange} label="State">
-            {state.map((item) => {
-              return (
-                <MenuItem key={item.key} value={item.name}>
-                  {item.name}
-                </MenuItem>
-              );
-            })}
-          </Select>
-        </FormControl>
+        <StateList state={state} handleChange={handleChange}/>
         <TextField
           name="post_code"
           style={{ margin: "2rem 1rem 0 0" }}

@@ -10,6 +10,7 @@ import { Profile } from "./pages/Profile";
 import { RequireAuth } from "react-auth-kit";
 import { UserDetail } from "./pages/UserDetail";
 import { UserContextProvider } from "./Context/UserContext";
+import { PostJob } from "./pages/PostJob";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             <Route path="/about" element={<About />}></Route>
             <Route path="/profile" element={<Profile />}></Route>
             <Route path="/userDetail" element={<UserDetail />}></Route>
+            <Route path="/postJob" element={<PostJob />}></Route>
           </Routes>
         </UserContextProvider>
       </Router>

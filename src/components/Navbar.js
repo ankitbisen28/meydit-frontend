@@ -7,7 +7,6 @@ import {
   useMediaQuery,
   Box,
   useTheme,
-  Button,
 } from "@mui/material";
 import { DrawerComp } from "./DrawerComp";
 import UserContext from "../Context/UserContext";
@@ -15,7 +14,7 @@ import { useContext } from "react";
 
 export const Navbar = () => {
 
-  const { logout, authHeader } = useContext(UserContext);
+  const { authHeader } = useContext(UserContext);
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -89,14 +88,16 @@ export const Navbar = () => {
                 >
                   Profile
                 </Link>
-                <Button
+                <Link
                   style={{
+                    fontFamily: "Ubuntu",
+                    textDecoration: "none",
                     color: "#fff",
                   }}
-                  onClick={logout}
+                  to="/postJob"
                 >
-                  Logout
-                </Button>
+                  Post Job
+                </Link>
               </Stack>
             ) : (
               <Link

@@ -1,12 +1,14 @@
 import React, { useContext } from "react";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import UserContext from "../Context/UserContext";
 
 export const Profile = () => {
-  const { userDetails } = useContext(UserContext);
+  const { userDetails, logout } = useContext(UserContext);
+
+  
   const userProfile = userDetails.map((item) => item.userProfile);
-  // console.log(userProfile);
+  
   return (
     <Box
       width="100wh"
@@ -48,6 +50,9 @@ export const Profile = () => {
                 <Typography marginTop="2rem" fontSize={20}>
                   Post Code : {item.post_code}
                 </Typography>
+                <Button style={{marginTop: '2rem', width: "100px"}} variant="contained" onClick={logout}>
+                  Logout
+                </Button>
               </Grid>
             </Grid>
           );
