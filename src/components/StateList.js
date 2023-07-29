@@ -4,7 +4,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import FormControl from "@mui/material/FormControl";
 
-export const StateList = ({state, handleChange, errors, values}) => {
+export const StateList = ({state, handleChange, values}) => {
   return (
     <FormControl sx={{margin: "2rem 1rem 0 0", width: "17rem"}}>
           <InputLabel id="demo-simple-select-label">State</InputLabel>
