@@ -2,17 +2,22 @@ import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
   typography: {
-    fontFamily: 'Ubuntu, sans-serif',
+    fontFamily: 'Poppins,sans-serif',
+    h1: {
+      fontSize: "2rem",
+      fontWeight: "600"
+    }
+    
   },
   palette: {
     primary: {
-        main: "#394867"
+        main: "#fff"
     },
     secondary: {
-      main: '#212A3E'
+      main: '#d19c97'
     },
     info: {
-      main: '#F1F6F9'
+      main: '#1c1c1c'
     },
     grey: {
       main: "#9BA4B5"

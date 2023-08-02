@@ -7,113 +7,127 @@ import {
   useMediaQuery,
   Box,
   useTheme,
+  Typography,
+  styled,
+  alpha,
+  Avatar,
 } from "@mui/material";
 import { DrawerComp } from "./DrawerComp";
 import UserContext from "../Context/UserContext";
 import { useContext } from "react";
+import InputBase from "@mui/material/InputBase";
+
+import IconButton from "@mui/material/IconButton";
+import Badge from "@mui/material/Badge";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import Ankit from "../assets/Images/Ankit.jpg";
+
+import SearchIcon from "@mui/icons-material/Search";
+
+const CustomToolBar = styled(Toolbar)({
+  display: "flex",
+  justifyContent: "space-around",
+  alignItems: "center",
+});
+
+const Search = styled("div")(({ theme }) => ({
+  position: "relative",
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  "&:hover": {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginRight: theme.spacing(2),
+  marginLeft: 0,
+  width: "100%",
+  [theme.breakpoints.up("sm")]: {
+    marginLeft: theme.spacing(3),
+    width: "auto",
+  },
+}));
+
+const SearchIconWrapper = styled("div")(({ theme }) => ({
+  // padding: theme.spacing(0, 2),
+  height: "100%",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "end",
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: "inherit",
+  "& .MuiInputBase-input": {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("md")]: {
+      width: "20ch",
+    },
+  },
+}));
 
 export const Navbar = () => {
-
   const { authHeader } = useContext(UserContext);
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
-    <AppBar
-      color="secondary"
-      sx={{
-        justifyContent: "none",
-      }}
-      px="20px"
-    >
-      <Toolbar>
-        <Link
-          style={{
-            fontSize: "1.5rem",
-            fontFamily: "Ubuntu",
-            color: "#fff",
-            textDecoration: "none",
-          }}
-          to="/"
+    <AppBar sx={{ boxShadow: "none" }}>
+      <CustomToolBar>
+        <Typography
+          variant="h1"
+          noWrap
+          component="div"
+          sx={{ display: { xs: "none", sm: "block" } }}
         >
           Meydit
-        </Link>
-
-        {isMatch ? (
-          <Box marginLeft="auto">
-            <DrawerComp />
-          </Box>
-        ) : (
-          <Stack
-            direction="row"
-            marginLeft="auto"
-            gap="40px"
-            fontSize="20px"
-            alignItems="flex-end"
+        </Typography>
+        <Search>
+          <StyledInputBase
+            placeholder="Search for products"
+            inputProps={{ "aria-label": "search" }}
+          />
+        </Search>
+        <SearchIconWrapper>
+          <SearchIcon />
+        </SearchIconWrapper>
+        <Box sx={{ display: { xs: "none", md: "flex" } }}>
+          <IconButton
+            sx={{
+              border: "1px solid #edf1ff !important",
+              padding: ".375rem .75rem",
+              borderRadius: "0",
+              margin: "15px",
+            }}
+            size="large"
+            aria-label="show 4 new mails"
+            color="inherit"
           >
-            {authHeader() ? (
-              <Stack
-                direction="row"
-                marginLeft="auto"
-                gap="40px"
-                alignItems="center"
-              >
-                <Link
-                  to="/"
-                  style={{
-                    fontFamily: "Ubuntu",
-                    textDecoration: "none",
-                    color: "#fff",
-                  }}
-                >
-                  Home
-                </Link>
-                <Link
-                  style={{
-                    fontFamily: "Ubuntu",
-                    textDecoration: "none",
-                    color: "#fff",
-                  }}
-                  to="/about"
-                >
-                  About
-                </Link>
-                <Link
-                  style={{
-                    fontFamily: "Ubuntu",
-                    textDecoration: "none",
-                    color: "#fff",
-                  }}
-                  to="/profile"
-                >
-                  Profile
-                </Link>
-                <Link
-                  style={{
-                    fontFamily: "Ubuntu",
-                    textDecoration: "none",
-                    color: "#fff",
-                  }}
-                  to="/postJob"
-                >
-                  Post Job
-                </Link>
-              </Stack>
-            ) : (
-              <Link
-                style={{
-                  fontFamily: "Ubuntu",
-                  textDecoration: "none",
-                  color: "#fff",
-                }}
-                to="/about"
-              >
-                About
-              </Link>
-            )}
-          </Stack>
-        )}
-      </Toolbar>
+            <Badge badgeContent={4} color="error">
+              <FavoriteIcon />
+            </Badge>
+          </IconButton>
+          <IconButton
+            sx={{
+              border: "1px solid #edf1ff !important",
+              padding: ".375rem .75rem",
+              borderRadius: "0",
+              margin: "15px",
+            }}
+            size="large"
+            aria-label="show 17 new notifications"
+            color="inherit"
+          >
+            <Badge badgeContent={17} color="error">
+              <ShoppingCartIcon />
+            </Badge>
+          </IconButton>
+        </Box>
+      </CustomToolBar>
     </AppBar>
   );
 };
