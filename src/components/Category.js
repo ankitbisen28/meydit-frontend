@@ -1,63 +1,48 @@
-import React, { useState } from "react";
-import { Button, MenuItem, Divider, Menu } from "@mui/material";
-import ArchiveIcon from "@mui/icons-material/Archive";
-import EditIcon from "@mui/icons-material/Edit";
-import FileCopyIcon from "@mui/icons-material/FileCopy";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import React from "react";
+import { Button, MenuItem, Menu, styled } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state";
+
+const StyledButton = styled(Button)({
+  height: "3rem",
+  width: "27em",
+  boxShadow: "none",
+  borderRadius: "0",
+});
+
+const StyledMenuItem = styled(MenuItem)({
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  width: "23.6rem",
+  alignItems: "center",
+});
 
 export const Category = () => {
-  const [anchorEl, setAnchorEl] = useState("");
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
   return (
     <>
-      <Button
-        id="demo-customized-button"
-        aria-controls={open ? "demo-customized-menu" : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? "true" : undefined}
-        variant="contained"
-        disableElevation
-        onClick={handleClick}
-        endIcon={<KeyboardArrowDownIcon />}
-      >
-        Options
-      </Button>
-      <Menu
-        id="demo-customized-menu"
-        MenuListProps={{
-          "aria-labelledby": "demo-customized-button",
-        }}
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-      >
-        <MenuItem onClick={handleClose} disableRipple>
-          <EditIcon />
-          Edit
-        </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
-          <FileCopyIcon />
-          Duplicate
-        </MenuItem>
-        <Divider sx={{ my: 0.5 }} />
-        <MenuItem onClick={handleClose} disableRipple>
-          <ArchiveIcon />
-          Archive
-        </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
-          <MoreHorizIcon />
-          More
-        </MenuItem>
-      </Menu>
+      <PopupState variant="popover" popupId="demo-popup-menu">
+        {(popupState) => (
+          <React.Fragment>
+            <StyledButton
+              variant="contained"
+              {...bindTrigger(popupState)}
+              endIcon={<KeyboardArrowDownIcon />}
+            >
+              Categories
+            </StyledButton>
+            <Menu {...bindMenu(popupState)} sx={{borderRadius: "none"}}>
+              <StyledMenuItem onClick={popupState.close}>
+                Profile
+              </StyledMenuItem>
+              <StyledMenuItem onClick={popupState.close}>
+                My account
+              </StyledMenuItem>
+              <StyledMenuItem onClick={popupState.close}>Logout</StyledMenuItem>
+            </Menu>
+          </React.Fragment>
+        )}
+      </PopupState>
     </>
   );
 };
