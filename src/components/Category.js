@@ -4,17 +4,18 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state";
 
 const StyledButton = styled(Button)({
-  height: "3rem",
-  width: "27em",
+  height: "4.5rem",
+  width: "30em",
   boxShadow: "none",
   borderRadius: "0",
+  backgroundColor: '#d19c97'
 });
 
 const StyledMenuItem = styled(MenuItem)({
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
-  width: "23.6rem",
+  width: "26.3rem",
   alignItems: "center",
 });
 

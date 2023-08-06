@@ -9,18 +9,18 @@ export const Home = () => {
 
   return (
     <>
-      <Container>
-        <Grid container spacing={2} marginTop={9} height='70vh'>
-          <Grid item xs={4} style={{paddingLeft: '0', paddingTop: '0'}} sx={{ backgroundColor: "red" }}>
+      <Container style={{maxWidth: "1350px"}}>
+        <Grid container direction={{xs: 'column', sm: 'row',}} spacing={2} marginTop={9} height={{xs: '0', lg:'70vh'}}>
+          <Grid item xs={4} style={{ paddingLeft: "0", paddingTop: "0" }}>
             <Category />
           </Grid>
-          <Grid item xs={8} sx={{ backgroundColor: "lightgreen" }}>
+          <Grid item xs={8} style={{ paddingLeft: "0", paddingTop: "0" }}>
             <Banner />
           </Grid>
         </Grid>
-        <Button color="error" onClick={logout}>
+        {/* <Button color="error" onClick={logout}>
           Logout
-        </Button>
+        </Button> */}
       </Container>
     </>
   );

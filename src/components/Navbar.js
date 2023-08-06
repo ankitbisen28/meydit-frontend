@@ -21,7 +21,6 @@ import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import Ankit from "../assets/Images/Ankit.jpg";
 
 import SearchIcon from "@mui/icons-material/Search";
 
@@ -108,7 +107,7 @@ export const Navbar = () => {
             color="inherit"
           >
             <Badge badgeContent={4} color="error">
-              <FavoriteIcon />
+              <FavoriteIcon color="secondary"   />
             </Badge>
           </IconButton>
           <IconButton
@@ -123,7 +122,7 @@ export const Navbar = () => {
             color="inherit"
           >
             <Badge badgeContent={17} color="error">
-              <ShoppingCartIcon />
+              <ShoppingCartIcon color="secondary" />
             </Badge>
           </IconButton>
         </Box>
