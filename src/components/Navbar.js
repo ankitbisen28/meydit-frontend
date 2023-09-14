@@ -1,20 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import {
-  Stack,
   AppBar,
   Toolbar,
-  useMediaQuery,
   Box,
-  useTheme,
   Typography,
   styled,
   alpha,
-  Avatar,
 } from "@mui/material";
-import { DrawerComp } from "./DrawerComp";
-import UserContext from "../Context/UserContext";
-import { useContext } from "react";
 import InputBase from "@mui/material/InputBase";
 
 import IconButton from "@mui/material/IconButton";
@@ -70,9 +62,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export const Navbar = () => {
-  const { authHeader } = useContext(UserContext);
-  const theme = useTheme();
-  const isMatch = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
     <AppBar sx={{ boxShadow: "none" }}>

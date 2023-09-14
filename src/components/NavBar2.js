@@ -1,9 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { AppBar, Toolbar, Stack, Avatar } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
+import { AppBar, Toolbar, Stack, Avatar, Button } from "@mui/material";
 import Ankit from "../assets/Images/Ankit.jpg";
 
 export const NavBar2 = () => {
+
+  const navigate = useNavigate();
+
   return (
     <AppBar position="static" sx={{ boxShadow: "none" }}>
       <Toolbar sx={{ justifyContent: "space-between", height: "70px" }}>
@@ -28,7 +31,9 @@ export const NavBar2 = () => {
           </Link>
         </Stack>
         <Stack direction="row" alignItems="flex-end">
-          <Avatar alt="Ankit Bisen" src={Ankit} />
+          <Button onClick={()=> navigate("/profile")}>
+            <Avatar alt="Ankit Bisen" src={Ankit} />
+          </Button>
         </Stack>
       </Toolbar>
     </AppBar>
