@@ -1,9 +1,10 @@
-import { Button, Container, Grid } from "@mui/material";
+import { Button, Container, Grid, Box, Typography } from "@mui/material";
 import React, { useContext } from "react";
 import UserContext from "../Context/UserContext";
 import { Category } from "../components/Category";
 import { Banner } from "../components/Banner";
 import { Services } from "../components/Services";
+import { ClothCategory } from "../components/ClothCategory";
 
 export const Home = () => {
   const { logout } = useContext(UserContext);
@@ -26,6 +27,12 @@ export const Home = () => {
           </Grid>
         </Grid>
         <Services />
+        <Typography variant="h4" textAlign="center" mt={3}>Explore Category</Typography>
+        <Box display="flex" flexDirection="row" gap={7}>
+          <ClothCategory />
+          <ClothCategory />
+          <ClothCategory />
+        </Box>
         <Button color="error" onClick={logout}>
           Logout
         </Button>

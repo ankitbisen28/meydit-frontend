@@ -11,7 +11,7 @@ const StyledBox = styled(Box)({
   alignItems: "center",
   boxSizing: "border-box",
   border: "1px #dbdbdb solid",
-  borderRadius: "2px",
+  borderRadius: "5px",
 });
 
 export const ServiceCard = ({Icon, product}) => {
