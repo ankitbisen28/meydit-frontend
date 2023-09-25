@@ -12,6 +12,7 @@ export const UserContextProvider = ({ children }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [userDetails, setuserDetails] = useState({});
+  const [profile, setProfile] = useState({});
   const singOut = useSignOut();
   const navigate = useNavigate();
   const signIn = useSignIn();
@@ -22,6 +23,22 @@ export const UserContextProvider = ({ children }) => {
   const headers = {
     "Content-Type": "application/json",
     Authorization: authHeader(),
+  };
+
+  // console.log(profile);
+
+  const UserImage = async () => {
+    try {
+      const imagePath = userDetails[0].userProfile[0].image;
+      const profileImage = await axios.get(`/api/user/image/${imagePath}`, {
+        headers: headers,
+        responseType: "blob",
+      });
+      const url = window.URL.createObjectURL(new Blob([profileImage.data]));
+      setProfile(url);
+    } catch (error) {
+      console.error("Error fetching user Image:", error);
+    }
   };
 
   const fetchUserDetails = async () => {
@@ -39,6 +56,7 @@ export const UserContextProvider = ({ children }) => {
 
   useEffect(() => {
     fetchUserDetails();
+    UserImage();
     // eslint-disable-next-line
   }, [authHeader()]);
 
@@ -94,6 +112,7 @@ export const UserContextProvider = ({ children }) => {
     headers,
     userDetails,
     authHeader,
+    profile,
   };
 
   return (

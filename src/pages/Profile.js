@@ -1,14 +1,19 @@
 import React, { useContext } from "react";
-import { Box, Button, Grid, Typography } from "@mui/material";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { Box, Button, Grid, Typography, styled } from "@mui/material";
 import UserContext from "../Context/UserContext";
 
-export const Profile = () => {
-  const { userDetails, logout } = useContext(UserContext);
+const CircleImage = styled(Box)({
+  width: "200px",
+  height: "200px",
+  borderRadius: "50%",
+});
 
-  
+export const Profile = () => {
+  const { userDetails, logout, profile } = useContext(UserContext);
+
   const userProfile = userDetails.map((item) => item.userProfile);
-  
+  // console.log(userDetails[0].userProfile[0].image);
+
   return (
     <Box
       width="100wh"
@@ -29,13 +34,21 @@ export const Profile = () => {
                 flexDirection="column"
                 alignItems="center"
               >
-                <AccountCircleIcon style={{ width: "7rem", height: "7rem" }} />
-                <Typography fontSize={30}>{`${item.first_name} ${item.last_name}`}</Typography>
+                <CircleImage
+                  component="img"
+                  alt="profile image"
+                  src={profile}
+                ></CircleImage>
+                <Typography
+                  fontSize={30}
+                >{`${item.first_name} ${item.last_name}`}</Typography>
               </Grid>
               <Grid item xs={6} display="flex" flexDirection="column">
                 {userDetails.map((user) => {
                   return (
-                    <Typography key={user.email} fontSize={20}>Email : {user.email}</Typography>
+                    <Typography key={user.email} fontSize={20}>
+                      Email : {user.email}
+                    </Typography>
                   );
                 })}
                 <Typography marginTop="2rem" fontSize={20}>
@@ -50,7 +63,11 @@ export const Profile = () => {
                 <Typography marginTop="2rem" fontSize={20}>
                   Post Code : {item.post_code}
                 </Typography>
-                <Button style={{marginTop: '2rem', width: "100px"}} variant="contained" onClick={logout}>
+                <Button
+                  style={{ marginTop: "2rem", width: "100px" }}
+                  variant="contained"
+                  onClick={logout}
+                >
                   Logout
                 </Button>
               </Grid>
