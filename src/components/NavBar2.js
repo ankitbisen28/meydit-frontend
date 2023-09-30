@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AppBar, Toolbar, Stack, Avatar, Button } from "@mui/material";
-import Ankit from "../assets/Images/Ankit.jpg";
+import UserContext from "../Context/UserContext";
 
 export const NavBar2 = () => {
-
+  const { profile } = useContext(UserContext);
   const navigate = useNavigate();
 
   return (
@@ -31,8 +31,8 @@ export const NavBar2 = () => {
           </Link>
         </Stack>
         <Stack direction="row" alignItems="flex-end">
-          <Button onClick={()=> navigate("/profile")}>
-            <Avatar alt="Ankit Bisen" src={Ankit} />
+          <Button onClick={() => navigate("/profile")}>
+            <Avatar alt="Ankit Bisen" src={profile} />
           </Button>
         </Stack>
       </Toolbar>

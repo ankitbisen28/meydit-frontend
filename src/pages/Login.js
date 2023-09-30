@@ -106,7 +106,7 @@ export const Login = () => {
               Login
             </Button>
           </form>
-          <Button variant="text" onClick={() => navigate("/register")}>
+          <Button color="secondary" variant="text" onClick={() => navigate("/register")}>
             Don't have Account
           </Button>
         </Box>

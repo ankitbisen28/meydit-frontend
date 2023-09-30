@@ -129,7 +129,7 @@ export const Register = () => {
             >
               Make a Account
             </Button>
-            <Button fullWidth variant="text" onClick={() => navigate("/login")}>
+            <Button color="secondary" fullWidth variant="text" onClick={() => navigate("/login")}>
               Alredy have a Account
             </Button>
           </form>

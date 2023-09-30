@@ -11,8 +11,10 @@ export const UserContextProvider = ({ children }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [userDetails, setuserDetails] = useState({});
-  const [profile, setProfile] = useState({});
+  const [userDetails, setuserDetails] = useState(
+    JSON.parse(localStorage.getItem("userDetails")) || []
+  );
+  const [profile, setProfile] = useState("");
   const singOut = useSignOut();
   const navigate = useNavigate();
   const signIn = useSignIn();
@@ -25,17 +27,19 @@ export const UserContextProvider = ({ children }) => {
     Authorization: authHeader(),
   };
 
-  // console.log(profile);
+  // console.log(userDetails);
 
   const UserImage = async () => {
     try {
-      const imagePath = userDetails[0].userProfile[0].image;
-      const profileImage = await axios.get(`/api/user/image/${imagePath}`, {
-        headers: headers,
-        responseType: "blob",
-      });
-      const url = window.URL.createObjectURL(new Blob([profileImage.data]));
-      setProfile(url);
+      if (userDetails) {
+        const imagePath = userDetails[0].userProfile[0].image;
+        const profileImage = await axios.get(`/api/user/image/${imagePath}`, {
+          headers: headers,
+          responseType: "blob",
+        });
+        const url = window.URL.createObjectURL(new Blob([profileImage.data]));
+        setProfile(url);
+      }
     } catch (error) {
       console.error("Error fetching user Image:", error);
     }
@@ -47,7 +51,8 @@ export const UserContextProvider = ({ children }) => {
         const response = await axios.get("/api/user/profiles", {
           headers: headers,
         });
-        setuserDetails(response.data);
+        localStorage.setItem("userDetails", JSON.stringify(response.data));
+        setuserDetails(JSON.parse(localStorage.getItem("userDetails")));
       }
     } catch (error) {
       console.error("Error fetching user details:", error);
@@ -59,6 +64,11 @@ export const UserContextProvider = ({ children }) => {
     UserImage();
     // eslint-disable-next-line
   }, [authHeader()]);
+
+  // useEffect(() => {
+  //   UserImage();
+  //   // eslint-disable-next-line
+  // }, [userDetails]);
 
   const login = async () => {
     try {
