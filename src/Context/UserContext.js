@@ -27,6 +27,11 @@ export const UserContextProvider = ({ children }) => {
     Authorization: authHeader(),
   };
 
+  const HeaderTypeTwo = {
+    "Content-Type": "multipart/form-data",
+    Authorization: authHeader(),
+  };
+
   // console.log(userDetails);
 
   const UserImage = async () => {
@@ -107,6 +112,7 @@ export const UserContextProvider = ({ children }) => {
   const logout = () => {
     singOut();
     navigate("/login");
+    localStorage.removeItem("userDetails");
   };
 
   const value = {
@@ -123,6 +129,7 @@ export const UserContextProvider = ({ children }) => {
     userDetails,
     authHeader,
     profile,
+    HeaderTypeTwo,
   };
 
   return (

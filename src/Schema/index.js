@@ -58,4 +58,5 @@ export const userDetailsSchema = Yup.object({
   address: Yup.string().min(3).max(25).required("Please enter your address"),
   state: Yup.string().min(3).max(25).required("Please enter your state"),
   post_code: Yup.string().min(6).max(6).required("Please enter your post code"),
+  image: Yup.mixed().required("Please select an Image"),
 });

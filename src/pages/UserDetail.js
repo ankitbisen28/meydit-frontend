@@ -11,23 +11,9 @@ import { StateList } from "../components/StateList";
 import { userDetailsSchema } from "../Schema";
 
 export const UserDetail = () => {
-  // const [userData, setUserData] = useState({});
   const navigate = useNavigate();
 
-  const { headers } = useContext(UserContext);
-
-  // const handleSave = async (event) => {
-  //   event.preventDefault();
-  //   const response = await axios.post("/api/user/profile/create", userData, {
-  //     headers: headers,
-  //   });
-  //   navigate("/");
-  //   console.log(response);
-  // };
-
-  // const handleChange = (e) => {
-  //   setUserData({ ...userData, [e.target.name]: e.target.value });
-  // };
+  const { HeaderTypeTwo } = useContext(UserContext);
 
   const initialValues = {
     first_name: "",
@@ -36,21 +22,29 @@ export const UserDetail = () => {
     address: "",
     post_code: "",
     state: "",
+    image: "",
   };
 
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    useFormik({
-      initialValues: initialValues,
-      validationSchema: userDetailsSchema,
-      onSubmit: async (values, action) => {
-        const response = await axios.post("/api/user/profile/create", values, {
-          headers: headers,
-        });
-        action.resetForm();
-        navigate("/");
-        console.log(response);
-      },
-    });
+  const {
+    values,
+    errors,
+    touched,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+    setFieldValue,
+  } = useFormik({
+    initialValues: initialValues,
+    validationSchema: userDetailsSchema,
+    onSubmit: async (values, action) => {
+      const response = await axios.post("/api/user/profile/create", values, {
+        headers: HeaderTypeTwo,
+      });
+      action.resetForm();
+      navigate("/");
+      console.log(response);
+    },
+  });
 
   const ErrorTypography = styled(Typography)({
     color: "red",
@@ -157,6 +151,24 @@ export const UserDetail = () => {
               <ErrorTypography fontSize={13}>
                 {errors.post_code}
               </ErrorTypography>
+            ) : null}
+          </Box>
+          <Box>
+            <input
+              name="image"
+              id="image"
+              type="file"
+              style={{ margin: "2rem 1rem 0 0" }}
+              label="Image"
+              variant="outlined"
+              color="primary"
+              onChange={(event) => {
+                setFieldValue("image", event.currentTarget.files[0]);
+              }}
+              onBlur={handleBlur}
+            />
+            {touched.image && errors.image ? (
+              <ErrorTypography fontSize={13}>{errors.image}</ErrorTypography>
             ) : null}
           </Box>
         </Box>
