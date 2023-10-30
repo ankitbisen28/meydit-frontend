@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  AppBar,
-  Toolbar,
-  Box,
-  Typography,
-  styled,
-  alpha,
-} from "@mui/material";
+import { AppBar, Toolbar, Box, Typography, styled, alpha } from "@mui/material";
 import InputBase from "@mui/material/InputBase";
 
 import IconButton from "@mui/material/IconButton";
@@ -15,6 +8,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 import SearchIcon from "@mui/icons-material/Search";
+import { Link } from "react-router-dom";
 
 const CustomToolBar = styled(Toolbar)({
   display: "flex",
@@ -62,7 +56,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export const Navbar = () => {
-
   return (
     <AppBar sx={{ boxShadow: "none" }}>
       <CustomToolBar>
@@ -72,7 +65,15 @@ export const Navbar = () => {
           component="div"
           sx={{ display: { xs: "none", sm: "block" } }}
         >
-          Meydit
+          <Link
+            to="/"
+            style={{
+              textDecoration: "none",
+              color: "black",
+            }}
+          >
+            Meydit
+          </Link>
         </Typography>
         <Search>
           <StyledInputBase
@@ -96,7 +97,7 @@ export const Navbar = () => {
             color="inherit"
           >
             <Badge badgeContent={4} color="error">
-              <FavoriteIcon color="secondary"   />
+              <FavoriteIcon color="secondary" />
             </Badge>
           </IconButton>
           <IconButton

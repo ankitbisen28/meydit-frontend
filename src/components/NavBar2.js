@@ -29,6 +29,15 @@ export const NavBar2 = () => {
           >
             About
           </Link>
+          <Link
+            style={{
+              textDecoration: "none",
+              color: "black",
+            }}
+            to="/listjobs"
+          >
+            Jobs
+          </Link>
         </Stack>
         <Stack direction="row" alignItems="flex-end">
           <Button onClick={() => navigate("/profile")}>

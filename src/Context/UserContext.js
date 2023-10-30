@@ -66,14 +66,14 @@ export const UserContextProvider = ({ children }) => {
 
   useEffect(() => {
     fetchUserDetails();
-    UserImage();
+    // UserImage();
     // eslint-disable-next-line
   }, [authHeader()]);
 
-  // useEffect(() => {
-  //   UserImage();
-  //   // eslint-disable-next-line
-  // }, [userDetails]);
+  useEffect(() => {
+    UserImage();
+    // eslint-disable-next-line
+  }, [userDetails]);
 
   const login = async () => {
     try {
