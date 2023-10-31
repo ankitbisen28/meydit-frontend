@@ -42,7 +42,7 @@ export const UserDetail = () => {
       });
       action.resetForm();
       navigate("/");
-      console.log(response);
+      // console.log(response);
     },
   });
 

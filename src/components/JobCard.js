@@ -22,7 +22,7 @@ import bannerFour from "../assets/Images/banner-4.jpg";
 
 export const JobCard = () => {
   const { jobs } = useContext(JobContext);
-  console.log(jobs);
+  // console.log(jobs);
   return (
     <Box
       display="flex"
