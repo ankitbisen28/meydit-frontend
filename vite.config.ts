@@ -4,7 +4,7 @@ import react from "@vitejs/plugin-react-swc";
 export default defineConfig({
   server: {
     proxy: {
-      "/api": "http://localhost:3333",
+      "/api": "https://meydit-server.onrender.com",
     },
   },
   plugins: [
